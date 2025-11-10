@@ -98,3 +98,15 @@ The remaining **four** unit tests can be to verify any function or component you
 - Verify that the leaderboard is displaying the correct user name, number of questions asked, and number of questions answered.
 - For answered polls, verify that the percentage of people who voted for an option is calculated and displayed correctly.
 - Verify the navigation bar displays all expected links.
+
+## Technologies Used
+
+- React v19
+- React Redux v9
+- Redux Toolkit v2
+- React Router v7
+- Tailwind CSS v4.1
+- Jest v30
+- Vite v7
+
+See `packages.json` for more specifics.
