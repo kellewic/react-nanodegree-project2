@@ -1,0 +1,45 @@
+/* Keyframe animations */
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes floating {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Base gradient class with common properties */
+.gradientBg {
+    background-size: 300% 300%;
+    animation: gradientShift 26s ease infinite;
+}
+
+/* Base glass effect */
+.glassEffect {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+/* Base floating animation */
+.floating {
+    animation: floating 6s ease-in-out infinite;
+}
+
+/* Reduced motion support - applies globally */
+@media (prefers-reduced-motion: reduce) {
+    .gradientBg,
+    .floating {
+        animation: none;
+    }
+}

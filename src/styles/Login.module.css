@@ -1,23 +1,15 @@
-@keyframes gradientShift {
-    0%, 100% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-}
-
+/* Compose from shared styles and add page-specific background */
 .gradientBg {
+    composes: gradientBg from '../styles/shared.css';
     background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 25%, #334155 50%, #475569 75%, #1e3a8a 100%);
-    background-size: 300% 300%;
-    animation: gradientShift 26s ease infinite;
 }
 
 .glassEffect {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    composes: glassEffect from '../styles/shared.css';
+}
+
+.floating {
+    composes: floating from '../styles/shared.css';
 }
 
 .inputFocus {
@@ -27,17 +19,4 @@
 .inputFocus:focus {
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.floating {
-    animation: floating 6s ease-in-out infinite;
-}
-
-@keyframes floating {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
 }

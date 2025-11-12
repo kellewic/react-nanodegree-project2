@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store/global.js";
+import "./styles/shared.css";
 import Home from "./pages/Home.js";
 import Login from "./pages/Login.js";
 import NotFound from "./pages/NotFound.js";
