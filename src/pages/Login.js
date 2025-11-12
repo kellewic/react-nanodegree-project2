@@ -56,17 +56,6 @@ function Login() {
                             />
                         </div>
 
-                        {/* Remember Me & Forgot Password */}
-                        <div className="flex items-center justify-between text-sm">
-                            <label className="flex items-center text-white cursor-pointer">
-                                <input type="checkbox" className="w-4 h-4 rounded border-white/30 bg-white/20 text-white focus:ring-white/50 focus:ring-2" />
-                                <span className="ml-2">Remember me</span>
-                            </label>
-                            <a href="#" className="text-white hover:text-white/80 transition-colors font-medium">
-                                Forgot password?
-                            </a>
-                        </div>
-
                         {/* Submit Button */}
                         <button
                             type="submit"
