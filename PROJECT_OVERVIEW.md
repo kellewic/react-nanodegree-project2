@@ -26,6 +26,7 @@ Using the provided starter code, you will build a React/Redux front end for the 
 4. In order to create unit tests for your project, you'll need to install jest and testing-library for the unit testing, snapshot testing, and DOM testing. You can add these to your project with npm.
 5. While the focus (and specification) of this project is based on functionality rather than styling, please ensure that your app is presentable and easy to navigate.
 6. Please carefully test your app against the rubric to make sure all of the rubric requirements are met. Your project must meet all of the rubric criteria in order to pass.
+7. For files that include JSX, refrain from using the .jsx extension (you can prefer .js). You can assume that your reviewer will have npm installed on their machine.
 
 ## App Functionality
 
