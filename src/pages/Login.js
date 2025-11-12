@@ -1,18 +1,17 @@
-import "../styles/Login.css";
+import styles from "../styles/Login.module.css";
 
 function Login() {
-
     return (
-        <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden gradient-bg">
+        <div className={`min-h-screen w-full flex items-center justify-center relative overflow-hidden ${styles.gradientBg}`}>
             {/* Animated Background Blobs */}
-            <div className="absolute w-72 h-72 bg-blue-600/30 rounded-full blur-3xl floating top-20 left-20"></div>
-            <div className="absolute w-96 h-96 bg-slate-600/30 rounded-full blur-3xl floating bottom-20 right-20" style={{ animationDelay: "2s" }}></div>
-            <div className="absolute w-64 h-64 bg-blue-700/30 rounded-full blur-3xl floating top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{ animationDelay: "4s" }}></div>
+            <div className={`absolute w-72 h-72 bg-blue-600/30 rounded-full blur-3xl ${styles.floating} top-20 left-20`}></div>
+            <div className={`absolute w-96 h-96 bg-slate-600/30 rounded-full blur-3xl ${styles.floating} bottom-20 right-20`} style={{ animationDelay: "2s" }}></div>
+            <div className={`absolute w-64 h-64 bg-blue-700/30 rounded-full blur-3xl ${styles.floating} top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`} style={{ animationDelay: "4s" }}></div>
 
             {/* Login Container */}
             <div className="relative z-10 w-full max-w-md px-4">
                 {/* Glass Card */}
-                <div className="glass-effect rounded-3xl shadow-2xl p-8 md:p-12">
+                <div className={`${styles.glassEffect} rounded-3xl shadow-2xl p-8 md:p-12`}>
                     {/* Header */}
                     <div className="text-center mb-8">
                         <div className="inline-block p-3 bg-white/20 rounded-2xl mb-4">
@@ -36,7 +35,7 @@ function Login() {
                                 id="email"
                                 name="email"
                                 required
-                                className="input-focus w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50"
+                                className={`${styles.inputFocus} w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50`}
                                 placeholder="you@example.com"
                             />
                         </div>
@@ -51,7 +50,7 @@ function Login() {
                                 id="password"
                                 name="password"
                                 required
-                                className="input-focus w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50"
+                                className={`${styles.inputFocus} w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50`}
                                 placeholder="••••••••"
                             />
                         </div>
@@ -66,12 +65,12 @@ function Login() {
                     </form>
 
                     {/* Sign Up Link */}
-                    <p className="mt-8 text-center text-white/80">
+                    <div className="mt-8 text-center text-white/80">
                         <div>Don't have an account?</div>
                         <a href="#" className="text-white font-semibold hover:text-white/90 transition-colors">
                             Sign up
                         </a>
-                    </p>
+                    </div>
                 </div>
             </div>
         </div>

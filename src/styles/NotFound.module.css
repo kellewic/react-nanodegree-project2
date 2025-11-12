@@ -1,4 +1,4 @@
-@keyframes gradient-shift {
+@keyframes gradientShift {
     0%, 100% {
         background-position: 0% 50%;
     }
@@ -7,10 +7,10 @@
     }
 }
 
-.gradient-bg {
+.gradientBg {
     background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 25%, #db2777 50%, #dc2626 75%, #1e3a8a 100%);
     background-size: 300% 300%;
-    animation: gradient-shift 20s ease infinite;
+    animation: gradientShift 20s ease infinite;
 }
 
 .glass-effect {
@@ -53,7 +53,7 @@
 }
 
 /* Orbiting animation for icon */
-.orbit-ring {
+.orbitRing {
     width: 140px;
     height: 140px;
     border: 2px solid rgba(255, 255, 255, 0.3);
@@ -62,7 +62,7 @@
     position: relative;
 }
 
-.orbit-dot {
+.orbitDot {
     width: 12px;
     height: 12px;
     background: white;
@@ -87,8 +87,8 @@
 @media (prefers-reduced-motion: reduce) {
     .glitch,
     .floating,
-    .gradient-bg,
-    .orbit-ring {
+    .gradientBg,
+    .orbitRing {
         animation: none;
     }
     
@@ -99,7 +99,7 @@
 
 /* Responsive adjustments */
 @media (max-width: 640px) {
-    .orbit-ring {
+    .orbitRing {
         width: 120px;
         height: 120px;
     }

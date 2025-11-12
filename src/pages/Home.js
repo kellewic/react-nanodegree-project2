@@ -1,6 +1,4 @@
-//import { useState, useEffect, useMemo, useCallback } from "react";
-//import { Routes, Route } from "react-router-dom";
-import "../styles/Home.css";
+import styles from "../styles/Home.module.css";
 
 function Home() {
 

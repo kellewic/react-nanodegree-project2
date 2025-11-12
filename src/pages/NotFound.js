@@ -1,25 +1,25 @@
 import { Link } from "react-router-dom";
-import "../styles/NotFound.css";
+import styles from "../styles/NotFound.module.css";
 
 function NotFound() {
     return (
-        <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden gradient-bg">
+        <div className={`min-h-screen w-full flex items-center justify-center relative overflow-hidden ${styles.gradientBg}`}>
             {/* Animated Background Blobs */}
-            <div className="absolute w-72 h-72 bg-red-600/30 rounded-full blur-3xl floating top-20 left-20"></div>
-            <div className="absolute w-96 h-96 bg-orange-600/30 rounded-full blur-3xl floating bottom-20 right-20" style={{ animationDelay: "2s" }}></div>
-            <div className="absolute w-64 h-64 bg-purple-700/30 rounded-full blur-3xl floating top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{ animationDelay: "4s" }}></div>
+            <div className={`absolute w-72 h-72 bg-red-600/30 rounded-full blur-3xl ${styles.floating} top-20 left-20`}></div>
+            <div className={`absolute w-96 h-96 bg-orange-600/30 rounded-full blur-3xl ${styles.floating} bottom-20 right-20`} style={{ animationDelay: "2s" }}></div>
+            <div className={`absolute w-64 h-64 bg-purple-700/30 rounded-full blur-3xl ${styles.floating} top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`} style={{ animationDelay: "4s" }}></div>
 
             {/* 404 Container */}
             <div className="relative z-10 w-full max-w-2xl px-4">
                 {/* Glass Card */}
-                <div className="glass-effect rounded-3xl shadow-2xl p-8 md:p-12 text-center">
+                <div className={`${styles.glassEffect} rounded-3xl shadow-2xl p-8 md:p-12 text-center`}>
                     {/* Animated 404 Icon */}
                     <div className="inline-block mb-6">
                         <div className="relative">
                             {/* Orbiting circles */}
                             <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="orbit-ring">
-                                    <div className="orbit-dot"></div>
+                                <div className={styles.orbitRing}>
+                                    <div className={styles.orbitDot}></div>
                                 </div>
                             </div>
 
@@ -33,7 +33,7 @@ function NotFound() {
                     </div>
 
                     {/* 404 Text */}
-                    <h1 className="text-8xl md:text-9xl font-bold text-white mb-4 tracking-tight glitch" data-text="404">
+                    <h1 className={`text-8xl md:text-9xl font-bold text-white mb-4 tracking-tight ${styles.glitch}`} data-text="404">
                         404
                     </h1>
 
