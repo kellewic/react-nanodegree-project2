@@ -1,12 +1,12 @@
 //import { useState, useEffect, useMemo, useCallback } from "react";
 //import { Routes, Route } from "react-router-dom";
-import "./styles/App.css";
+import "../styles/Home.css";
 
-function App() {
+function Home() {
 
   return (
-    <div className="text-3xl font-bold">New App</div>
+    <div className="text-3xl font-bold">Home</div>
   );
 }
 
-export default App;
+export default Home;
