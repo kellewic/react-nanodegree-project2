@@ -1,0 +1,106 @@
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.gradient-bg {
+    background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 25%, #db2777 50%, #dc2626 75%, #1e3a8a 100%);
+    background-size: 300% 300%;
+    animation: gradient-shift 20s ease infinite;
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.floating {
+    animation: floating 6s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Glitch effect for 404 text */
+.glitch {
+    position: relative;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+                 0 0 40px rgba(139, 92, 246, 0.3);
+    animation: gentle-pulse 3s ease-in-out infinite;
+}
+
+@keyframes gentle-pulse {
+    0%, 100% {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+                     0 0 40px rgba(139, 92, 246, 0.3);
+    }
+    50% {
+        text-shadow: 0 0 30px rgba(255, 255, 255, 0.6),
+                     0 0 60px rgba(139, 92, 246, 0.4);
+    }
+}
+
+/* Orbiting animation for icon */
+.orbit-ring {
+    width: 140px;
+    height: 140px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: orbit 8s linear infinite;
+    position: relative;
+}
+
+.orbit-dot {
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    margin-left: -6px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes orbit {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .glitch,
+    .floating,
+    .gradient-bg,
+    .orbit-ring {
+        animation: none;
+    }
+    
+    .glitch {
+        text-shadow: none;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .orbit-ring {
+        width: 120px;
+        height: 120px;
+    }
+}
