@@ -9,12 +9,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { _getUsers } from '../data/_DATA';
 
+export const USERS_STORAGE_KEY = 'employeePolls_localUsers';
+
 // Load users from _DATA.js and merge with localStorage
 export const loadUsers = createAsyncThunk(
     'users/loadUsers',
     async () => {
         const staticUsers = await _getUsers();
-        const localUsers = JSON.parse(localStorage.getItem('employeePolls_localUsers') || '{}');
+        const localUsers = JSON.parse(localStorage.getItem(USERS_STORAGE_KEY) || '{}');
         return { ...staticUsers, ...localUsers };
     }
 );
@@ -32,9 +34,9 @@ const usersSlice = createSlice({
             state.byId[user.id] = user;
 
             // Also save to localStorage
-            const localUsers = JSON.parse(localStorage.getItem('employeePolls_localUsers') || '{}');
+            const localUsers = JSON.parse(localStorage.getItem(USERS_STORAGE_KEY) || '{}');
             localUsers[user.id] = user;
-            localStorage.setItem('employeePolls_localUsers', JSON.stringify(localUsers));
+            localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(localUsers));
         }
     },
     extraReducers: (builder) => {

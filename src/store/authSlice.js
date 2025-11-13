@@ -7,8 +7,10 @@
  */
 import { createSlice } from '@reduxjs/toolkit';
 
+export const AUTH_STORAGE_KEY = 'employeePolls_auth';
+
 // Try to restore auth from localStorage on init
-const savedAuth = localStorage.getItem('employeePolls_auth');
+const savedAuth = localStorage.getItem(AUTH_STORAGE_KEY);
 const initialAuth = savedAuth ? JSON.parse(savedAuth) : {
     currentUser: null,
     isAuthenticated: false
@@ -22,7 +24,7 @@ const authSlice = createSlice({
             state.currentUser = action.payload;
             state.isAuthenticated = true;
             // Persist to localStorage
-            localStorage.setItem('employeePolls_auth', JSON.stringify({
+            localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify({
                 currentUser: action.payload,
                 isAuthenticated: true
             }));
@@ -31,7 +33,7 @@ const authSlice = createSlice({
             state.currentUser = null;
             state.isAuthenticated = false;
             // Clear from localStorage
-            localStorage.removeItem('employeePolls_auth');
+            localStorage.removeItem(AUTH_STORAGE_KEY);
         }
     }
 });
