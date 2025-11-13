@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../store/usersSlice";
 import { login } from "../store/authSlice";
 import ErrorMessage from "../components/ErrorMessage";
+import { getAvatarUrl } from "../utils/user";
 import styles from "../styles/Signup.module.css";
 
 /**
@@ -53,7 +54,7 @@ function Signup() {
             id: userId,
             password: password,
             name: fullName,
-            avatarURL: `https://i.pravatar.cc/150?u=${userId}`,
+            avatarURL: getAvatarUrl(userId),
             answers: {},
             questions: []
         };
@@ -104,7 +105,7 @@ function Signup() {
                         {/* Avatar Preview */}
                         <div className="flex justify-center mb-6">
                             <img
-                                src={`https://i.pravatar.cc/150?u=${userId}`}
+                                src={getAvatarUrl(userId)}
                                 alt="Your avatar"
                                 className="w-24 h-24 rounded-full border-2 border-white/50 shadow-lg"
                             />
@@ -219,7 +220,7 @@ function Signup() {
                                     {/* Actual Avatar */}
                                     {displayUserId && (
                                         <img
-                                            src={`https://i.pravatar.cc/150?u=${displayUserId}`}
+                                            src={getAvatarUrl(displayUserId)}
                                             alt="Avatar preview"
                                             className={`absolute inset-0 w-full h-full rounded-full border-2 border-white/50 shadow-lg transition-opacity duration-500 ${displayUserId ? 'opacity-100' : 'opacity-0'}`}
                                             onError={(e) => {
