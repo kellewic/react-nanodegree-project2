@@ -1,7 +1,48 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../store/authSlice";
+import ErrorMessage from "../components/ErrorMessage";
 import styles from "../styles/Login.module.css";
 
 function Login() {
+    const [userId, setUserId] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const users = useSelector((state) => state.users.byId);
+    const usersLoading = useSelector((state) => state.users.loading);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setError("");
+
+        // Validation
+        if (!userId.trim() || !password.trim()) {
+            setError("Please enter both user ID and password");
+            return;
+        }
+
+        // Check if user exists
+        const user = users[userId];
+        if (!user) {
+            setError("User ID not found. Please check your credentials or sign up.");
+            return;
+        }
+
+        // Check password
+        if (user.password !== password) {
+            setError("Incorrect password. Please try again.");
+            return;
+        }
+
+        // Login successful
+        dispatch(login(userId));
+        navigate('/');
+    };
+
     return (
         <div className={`min-h-screen w-full flex items-center justify-center relative overflow-hidden ${styles.gradientBg}`}>
             {/* Animated Background Blobs */}
@@ -24,8 +65,11 @@ function Login() {
                         <p className="text-white/80">Sign in to continue to your account</p>
                     </div>
 
+                    {/* Error Message */}
+                    <ErrorMessage message={error} />
+
                     {/* Form */}
-                    <form className="space-y-6">
+                    <form className="space-y-6" onSubmit={handleSubmit}>
                         {/* User ID Input */}
                         <div>
                             <label htmlFor="userId" className="block text-sm font-medium text-white mb-2">
@@ -35,8 +79,11 @@ function Login() {
                                 type="text"
                                 id="userId"
                                 name="userId"
+                                value={userId}
+                                onChange={(e) => setUserId(e.target.value)}
                                 required
-                                className={`${styles.inputFocus} w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50`}
+                                disabled={usersLoading}
+                                className={`${styles.inputFocus} w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:opacity-50`}
                                 placeholder="Enter your user ID"
                             />
                         </div>
@@ -50,8 +97,11 @@ function Login() {
                                 type="password"
                                 id="password"
                                 name="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 required
-                                className={`${styles.inputFocus} w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50`}
+                                disabled={usersLoading}
+                                className={`${styles.inputFocus} w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:opacity-50`}
                                 placeholder="Enter your password"
                             />
                         </div>
@@ -59,9 +109,10 @@ function Login() {
                         {/* Submit Button */}
                         <button
                             type="submit"
-                            className="w-full py-3 px-4 bg-white text-purple-600 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
+                            disabled={usersLoading}
+                            className="w-full py-3 px-4 bg-white text-purple-600 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                         >
-                            Sign In
+                            {usersLoading ? 'Loading...' : 'Sign In'}
                         </button>
                     </form>
 
