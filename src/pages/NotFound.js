@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import styles from "../styles/NotFound.module.css";
 
+/**
+ * Page shown when a user tries to access a non-existent route.
+ * 
+ * @returns {JSX.Element} NotFound component
+ */
 function NotFound() {
     return (
         <div className={`min-h-screen w-full flex items-center justify-center relative overflow-hidden ${styles.gradientBg}`}>
