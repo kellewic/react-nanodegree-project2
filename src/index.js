@@ -9,6 +9,7 @@ import Home from "./pages/Home.js";
 import Login from "./pages/Login.js";
 import Signup from "./pages/Signup.js";
 import NotFound from "./pages/NotFound.js";
+import RequireAuth from "./components/RequireAuth.js";
 
 // Load initial data
 store.dispatch(loadUsers());
@@ -18,9 +19,14 @@ createRoot(document.getElementById("root")).render(
         <BrowserRouter>
             <Provider store={store}>
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    {/* Protected routes */}
+                    <Route path="/" element={<RequireAuth><Home /></RequireAuth>} />
+
+                    {/* Public routes */}
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
+
+                    {/* Catch all routes */}
                     <Route path="/404" element={<NotFound />} />
                     <Route path="*" element={<Navigate to="/404" replace />} />
                 </Routes>
