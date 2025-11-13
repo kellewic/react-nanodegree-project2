@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../store/usersSlice";
 import { login } from "../store/authSlice";
+import ErrorMessage from "../components/ErrorMessage";
 import styles from "../styles/Signup.module.css";
 
 function Signup() {
@@ -134,11 +135,7 @@ function Signup() {
                     </div>
 
                     {/* Error display */}
-                    {error && (
-                        <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-white text-sm">
-                            {error}
-                        </div>
-                    )}
+                    <ErrorMessage message={error} />
 
                     {/* Form */}
                     <form className="space-y-6" onSubmit={handleSubmit}>
