@@ -4,6 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { BrowserRouter } from 'react-router-dom';
 import usersReducer, { USERS_STORAGE_KEY } from '../store/usersSlice';
 import authReducer, { AUTH_STORAGE_KEY } from '../store/authSlice';
+import { getAvatarUrl } from '../utils/user';
 
 /**
  * Creates a mock Redux store for testing with optional preloaded state.
@@ -57,11 +58,12 @@ export function renderWithProviders(
  * @returns {Object} Mock user object
  */
 export function createMockUser(overrides = {}) {
+    const userId = overrides.id || 'testuser';
     return {
-        id: 'testuser',
+        id: userId,
         name: 'Test User',
         password: 'password123',
-        avatarURL: 'https://i.pravatar.cc/150?u=testuser',
+        avatarURL: getAvatarUrl(userId),
         answers: {},
         questions: [],
         ...overrides,
