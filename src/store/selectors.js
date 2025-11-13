@@ -3,6 +3,9 @@
  * 
  * @param {Object} state - The state object
  * @returns {Object|null} The current user or null if not authenticated
+ * 
+ *   References:
+ *   - https://redux.js.org/usage/deriving-data-selectors
  */
 export const selectCurrentUser = (state) => {
     const userId = state.auth.currentUser;
