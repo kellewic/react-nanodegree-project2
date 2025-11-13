@@ -98,6 +98,50 @@ function Sidebar() {
                         </div>
                         {!isCollapsed && <span className={styles.navLabel}>Home</span>}
                     </Link>
+
+                    <Link
+                        to="/add"
+                        className={styles.navItem}
+                        aria-label="Add Poll"
+                    >
+                        <div className={styles.navIcon}>
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                aria-hidden="true"
+                            >
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="12" y1="8" x2="12" y2="16" />
+                                <line x1="8" y1="12" x2="16" y2="12" />
+                            </svg>
+                        </div>
+                        {!isCollapsed && <span className={styles.navLabel}>Add Poll</span>}
+                    </Link>
+
+                    <Link
+                        to="/leaderboard"
+                        className={styles.navItem}
+                        aria-label="Leaderboard"
+                    >
+                        <div className={styles.navIcon}>
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M8 21h8M12 3v18M4 7h16l-1.5 9H5.5L4 7z" />
+                            </svg>
+                        </div>
+                        {!isCollapsed && <span className={styles.navLabel}>Leaderboard</span>}
+                    </Link>
                 </nav>
 
                 {/* Bottom Section */}

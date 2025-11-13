@@ -6,6 +6,9 @@ import { store } from "./store/global.js";
 import { loadUsers } from "./store/usersSlice.js";
 import "./styles/shared.css";
 import Home from "./pages/Home.js";
+import AddPoll from "./pages/AddPoll.js";
+import ViewPoll from "./pages/ViewPoll.js";
+import Leaderboard from "./pages/Leaderboard.js";
 import Login from "./pages/Login.js";
 import Signup from "./pages/Signup.js";
 import NotFound from "./pages/NotFound.js";
@@ -25,6 +28,9 @@ createRoot(document.getElementById("root")).render(
                     {/* Public routes */}
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
+                    <Route path="/add" element={<AddPoll />} />
+                    <Route path="/questions/:question_id" element={<ViewPoll />} />
+                    <Route path="/leaderboard" element={<Leaderboard />} />
 
                     {/* Catch all routes */}
                     <Route path="/404" element={<NotFound />} />
