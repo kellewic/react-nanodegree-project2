@@ -28,7 +28,7 @@ function Sidebar() {
     return (
         <aside className={`${styles.sidebar} ${isCollapsed ? styles.collapsed : ''}`}>
             <div className={styles.sidebarContent}>
-                {/* Header with logo and collapse button */}
+                {/* Header with logo */}
                 <div className={styles.header}>
                     <div className={styles.logoSection}>
                         <div className={styles.logo}>
@@ -40,26 +40,28 @@ function Sidebar() {
                         </div>
                         {!isCollapsed && <span className={styles.brandName}>Employee Polls</span>}
                     </div>
-                    <button
-                        onClick={toggleSidebar}
-                        className={styles.collapseBtn}
-                        aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-                        aria-expanded={!isCollapsed}
-                    >
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className={styles.collapseIcon}
-                            aria-hidden="true"
-                        >
-                            <path d={isCollapsed ? "M9 18l6-6-6-6" : "M15 18l-6-6 6-6"} />
-                        </svg>
-                    </button>
                 </div>
+
+                {/* Floating collapse button */}
+                <button
+                    onClick={toggleSidebar}
+                    className={styles.collapseBtn}
+                    aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+                    aria-expanded={!isCollapsed}
+                >
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className={styles.collapseIcon}
+                        aria-hidden="true"
+                    >
+                        <path d={isCollapsed ? "M9 18l6-6-6-6" : "M15 18l-6-6 6-6"} />
+                    </svg>
+                </button>
 
                 {/* User Profile */}
                 <div className={styles.userProfile}>
