@@ -1,11 +1,16 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../store/usersSlice";
 import { login } from "../store/authSlice";
 import ErrorMessage from "../components/ErrorMessage";
 import styles from "../styles/Signup.module.css";
 
+/**
+ * Page shown to user to sign up.
+ * 
+ * @returns {JSX.Element} Signup component
+ */
 function Signup() {
     const [userId, setUserId] = useState("");
     const [displayUserId, setDisplayUserId] = useState("");
@@ -17,7 +22,11 @@ function Signup() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
     const users = useSelector((state) => state.users.byId);
+
+    // Get the return URL from location state, default to home
+    const returnUrl = location.state?.returnUrl || '/';
 
     const handleUserIdBlur = () => {
         setDisplayUserId(userId);
@@ -65,7 +74,7 @@ function Signup() {
 
             if (timeLeft === 0) {
                 clearInterval(timer);
-                navigate('/');
+                navigate(returnUrl);
             }
         }, 1000);
     };

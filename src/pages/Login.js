@@ -1,10 +1,15 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/authSlice";
 import ErrorMessage from "../components/ErrorMessage";
 import styles from "../styles/Login.module.css";
 
+/**
+ * Page shown to user to login.
+ * 
+ * @returns {JSX.Element} Login component
+ */
 function Login() {
     const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
@@ -12,8 +17,12 @@ function Login() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
     const users = useSelector((state) => state.users.byId);
     const usersLoading = useSelector((state) => state.users.loading);
+
+    // Get the return URL from location state, default to home
+    const returnUrl = location.state?.returnUrl || '/';
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -40,7 +49,7 @@ function Login() {
 
         // Login successful
         dispatch(login(userId));
-        navigate('/');
+        navigate(returnUrl);
     };
 
     return (
