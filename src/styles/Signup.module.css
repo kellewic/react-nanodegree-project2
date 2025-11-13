@@ -1,7 +1,7 @@
 /* Compose from shared styles and add page-specific background */
 .gradientBg {
     composes: gradientBg from '../styles/shared.css';
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 25%, #334155 50%, #475569 75%, #1e3a8a 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .glassEffect {

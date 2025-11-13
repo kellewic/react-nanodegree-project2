@@ -6,6 +6,7 @@ import { store } from "./store/global.js";
 import "./styles/shared.css";
 import Home from "./pages/Home.js";
 import Login from "./pages/Login.js";
+import Signup from "./pages/Signup.js";
 import NotFound from "./pages/NotFound.js";
 
 createRoot(document.getElementById("root")).render(
@@ -15,6 +16,7 @@ createRoot(document.getElementById("root")).render(
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
                     <Route path="/404" element={<NotFound />} />
                     <Route path="*" element={<Navigate to="/404" replace />} />
                 </Routes>

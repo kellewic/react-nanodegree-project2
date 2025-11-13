@@ -1,0 +1,143 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import styles from "../styles/Signup.module.css";
+
+function Signup() {
+    const [userId, setUserId] = useState("");
+    const [displayUserId, setDisplayUserId] = useState("");
+
+    const handleUserIdBlur = () => {
+        setDisplayUserId(userId);
+    };
+
+    return (
+        <div className={`min-h-screen w-full flex items-center justify-center relative overflow-hidden ${styles.gradientBg}`}>
+            {/* Animated Background Blobs */}
+            <div className={`absolute w-72 h-72 bg-purple-600/30 rounded-full blur-3xl ${styles.floating} top-20 left-20`}></div>
+            <div className={`absolute w-96 h-96 bg-blue-600/30 rounded-full blur-3xl ${styles.floating} bottom-20 right-20`} style={{ animationDelay: "2s" }}></div>
+            <div className={`absolute w-64 h-64 bg-purple-700/30 rounded-full blur-3xl ${styles.floating} top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`} style={{ animationDelay: "4s" }}></div>
+
+            {/* Signup Container */}
+            <div className="relative z-10 w-full max-w-md px-4">
+                {/* Glass Card */}
+                <div className={`${styles.glassEffect} rounded-3xl shadow-2xl p-8 md:p-12`}>
+                    {/* Header */}
+                    <div className="text-center mb-8">
+                        <div className="inline-block p-3 bg-white/20 rounded-2xl mb-4">
+                            <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+                            </svg>
+                        </div>
+                        <h1 className="text-3xl font-bold text-white mb-2">Create Account</h1>
+                        <p className="text-white/80">Sign up to start creating polls</p>
+                    </div>
+
+                    {/* Form */}
+                    <form className="space-y-6">
+                        {/* Full Name Input */}
+                        <div>
+                            <label htmlFor="fullName" className="block text-sm font-medium text-white mb-2">
+                                Full Name
+                            </label>
+                            <input
+                                type="text"
+                                id="fullName"
+                                name="fullName"
+                                required
+                                className={`${styles.inputFocus} w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50`}
+                                placeholder="Enter your full name"
+                            />
+                        </div>
+
+                        {/* User ID Input */}
+                        <div>
+                            <label htmlFor="userId" className="block text-sm font-medium text-white mb-2">
+                                User ID
+                            </label>
+                            <input
+                                type="text"
+                                id="userId"
+                                name="userId"
+                                value={userId}
+                                onChange={(e) => setUserId(e.target.value)}
+                                onBlur={handleUserIdBlur}
+                                required
+                                className={`${styles.inputFocus} w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50`}
+                                placeholder="Choose a unique user ID"
+                            />
+                        </div>
+
+                        {/* Password Input */}
+                        <div>
+                            <label htmlFor="password" className="block text-sm font-medium text-white mb-2">
+                                Password
+                            </label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                required
+                                className={`${styles.inputFocus} w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50`}
+                                placeholder="Create a password"
+                            />
+                        </div>
+
+                        {/* Avatar Preview Section */}
+                        <div className="text-center space-y-3">
+                            <label className="block text-sm font-medium text-white">
+                                Your Avatar Preview
+                            </label>
+                            <div className="flex justify-center">
+                                <div className="relative w-[150px] h-[150px]">
+                                    {/* Placeholder SVG */}
+                                    <div
+                                        className={`absolute inset-0 flex items-center justify-center bg-white/10 rounded-full border-2 border-white/30 transition-opacity duration-500 ${displayUserId ? 'opacity-0' : 'opacity-100'}`}
+                                    >
+                                        <svg className="w-20 h-20 text-white/50" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                        </svg>
+                                    </div>
+
+                                    {/* Actual Avatar */}
+                                    {displayUserId && (
+                                        <img
+                                            src={`https://i.pravatar.cc/150?u=${displayUserId}`}
+                                            alt="Avatar preview"
+                                            className={`absolute inset-0 w-full h-full rounded-full border-2 border-white/50 shadow-lg transition-opacity duration-500 ${displayUserId ? 'opacity-100' : 'opacity-0'}`}
+                                            onError={(e) => {
+                                                // Fallback if pravatar fails
+                                                e.target.style.display = 'none';
+                                            }}
+                                        />
+                                    )}
+                                </div>
+                            </div>
+                            <p className="text-white/70 text-sm">
+                                <svg className="w-5 h-5 inline-block mr-1 -mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                {displayUserId ? 'This will be your avatar' : 'Enter a user ID to see your avatar'}
+                            </p>
+                        </div>
+
+                        {/* Submit Button */}
+                        <button
+                            type="submit"
+                            className="w-full py-3 px-4 bg-white text-purple-600 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
+                        >
+                            Create Account
+                        </button>
+                    </form>
+
+                    {/* Login Link */}
+                    <div className="mt-8 text-center text-white/80">
+                        <div>Already have an account?</div>
+                        <Link to="/login" className="text-white font-semibold hover:text-white/90 transition-colors">Sign in</Link>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Signup;

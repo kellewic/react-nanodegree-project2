@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "../styles/Login.module.css";
 
 function Login() {
@@ -25,18 +26,18 @@ function Login() {
 
                     {/* Form */}
                     <form className="space-y-6">
-                        {/* Email Input */}
+                        {/* User ID Input */}
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
-                                Email Address
+                            <label htmlFor="userId" className="block text-sm font-medium text-white mb-2">
+                                User ID
                             </label>
                             <input
-                                type="email"
-                                id="email"
-                                name="email"
+                                type="text"
+                                id="userId"
+                                name="userId"
                                 required
                                 className={`${styles.inputFocus} w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50`}
-                                placeholder="you@example.com"
+                                placeholder="Enter your user ID"
                             />
                         </div>
 
@@ -51,7 +52,7 @@ function Login() {
                                 name="password"
                                 required
                                 className={`${styles.inputFocus} w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50`}
-                                placeholder="••••••••"
+                                placeholder="Enter your password"
                             />
                         </div>
 
@@ -67,9 +68,7 @@ function Login() {
                     {/* Sign Up Link */}
                     <div className="mt-8 text-center text-white/80">
                         <div>Don't have an account?</div>
-                        <a href="#" className="text-white font-semibold hover:text-white/90 transition-colors">
-                            Sign up
-                        </a>
+                        <Link to="/signup" className="text-white font-semibold hover:text-white/90 transition-colors">Sign up</Link>
                     </div>
                 </div>
             </div>
