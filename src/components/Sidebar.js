@@ -1,0 +1,132 @@
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
+import { selectCurrentUser } from '../store/selectors';
+import { logout } from '../store/authSlice';
+import styles from '../styles/Sidebar.module.css';
+import logo from '../images/logo.png';
+
+function Sidebar() {
+    const [isCollapsed, setIsCollapsed] = useState(false);
+    const currentUser = useSelector(selectCurrentUser);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate('/login');
+    };
+
+    const toggleSidebar = () => {
+        setIsCollapsed(!isCollapsed);
+    };
+
+    if (!currentUser) {
+        return null;
+    }
+
+    return (
+        <aside className={`${styles.sidebar} ${isCollapsed ? styles.collapsed : ''}`}>
+            <div className={styles.sidebarContent}>
+                {/* Header with logo and collapse button */}
+                <div className={styles.header}>
+                    <div className={styles.logoSection}>
+                        <div className={styles.logo}>
+                            <img
+                                src={logo}
+                                alt="Employee Polls logo"
+                                className={styles.logoIcon}
+                            />
+                        </div>
+                        {!isCollapsed && <span className={styles.brandName}>Employee Polls</span>}
+                    </div>
+                    <button
+                        onClick={toggleSidebar}
+                        className={styles.collapseBtn}
+                        aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+                        aria-expanded={!isCollapsed}
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className={styles.collapseIcon}
+                            aria-hidden="true"
+                        >
+                            <path d={isCollapsed ? "M9 18l6-6-6-6" : "M15 18l-6-6 6-6"} />
+                        </svg>
+                    </button>
+                </div>
+
+                {/* User Profile */}
+                <div className={styles.userProfile}>
+                    <div className={styles.avatar}>
+                        <img
+                            src={currentUser.avatarURL}
+                            alt={`${currentUser.name}'s avatar`}
+                            className={styles.avatarImg}
+                        />
+                    </div>
+                    {!isCollapsed && (
+                        <div className={styles.userInfo}>
+                            <div className={styles.userName}>{currentUser.name}</div>
+                            <div className={styles.userRole}>Team Member</div>
+                        </div>
+                    )}
+                </div>
+
+                {/* Navigation */}
+                <nav className={styles.nav} aria-label="Main navigation">
+                    <Link
+                        to="/"
+                        className={styles.navItem}
+                        aria-label="Home"
+                    >
+                        <div className={styles.navIcon}>
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                            >
+                                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                            </svg>
+                        </div>
+                        {!isCollapsed && <span className={styles.navLabel}>Home</span>}
+                    </Link>
+                </nav>
+
+                {/* Bottom Section */}
+                <div className={styles.bottomSection}>
+                    <button
+                        onClick={handleLogout}
+                        className={styles.logoutBtn}
+                        aria-label="Log out"
+                    >
+                        <div className={styles.navIcon}>
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                <polyline points="16 17 21 12 16 7" />
+                                <line x1="21" y1="12" x2="9" y2="12" />
+                            </svg>
+                        </div>
+                        {!isCollapsed && <span className={styles.navLabel}>Log Out</span>}
+                    </button>
+                </div>
+            </div>
+        </aside>
+    );
+}
+
+export default Sidebar;
+
