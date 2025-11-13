@@ -112,7 +112,7 @@ function Signup() {
 
                         {/* Countdown */}
                         <div className="text-white/90">
-                            <p className="mb-2">Redirecting to home in</p>
+                            <p className="mb-2">Redirecting in...</p>
                             <div className="text-5xl font-bold">{countdown}</div>
                         </div>
                     </div>
