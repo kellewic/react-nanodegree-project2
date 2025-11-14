@@ -77,3 +77,27 @@ export const selectAvailableUsersForImpersonation = createSelector(
         return allUsers.filter(user => user.id !== loggedInUser?.id);
     }
 );
+
+/**
+ * Get leaderboard data sorted by total score (questions answered + questions created)
+ * 
+ * @param {Object} state - State object
+ * @returns {Array} Array of users with their stats, sorted by total score descending
+ */
+export const selectLeaderboard = createSelector(
+    [(state) => state.users.byId],
+    (usersById) => {
+        const users = Object.values(usersById);
+
+        return users
+            .map(user => ({
+                id: user.id,
+                name: user.name,
+                avatarURL: user.avatarURL,
+                answeredCount: Object.keys(user.answers || {}).length,
+                createdCount: (user.questions || []).length,
+                totalScore: Object.keys(user.answers || {}).length + (user.questions || []).length
+            }))
+            .sort((a, b) => b.totalScore - a.totalScore);
+    }
+);
