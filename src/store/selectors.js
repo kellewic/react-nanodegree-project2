@@ -159,3 +159,31 @@ export const selectAnsweredQuestions = createSelector(
             .sort((a, b) => b.timestamp - a.timestamp);
     }
 );
+
+/**
+ * Get a single question by ID with author info and user's answer
+ * 
+ * @param {string} questionId - Question ID
+ * @returns {Function} Selector function for the question
+ */
+export const selectQuestionById = (questionId) =>
+    createSelector(
+        [
+            (state) => state.questions.byId,
+            (state) => state.users.byId,
+            selectCurrentUser
+        ],
+        (questionsById, usersById, currentUser) => {
+            const question = questionsById[questionId];
+            if (!question) return null;
+
+            const author = usersById[question.author];
+            const userAnswer = currentUser?.answers?.[questionId];
+
+            return {
+                ...question,
+                author,
+                userAnswer
+            };
+        }
+    );
