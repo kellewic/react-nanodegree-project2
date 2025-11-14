@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import PageLayout from "../components/PageLayout";
 import LoadingScreen from "../components/LoadingScreen";
 import { selectUnansweredQuestions, selectAnsweredQuestions } from "../store/selectors";
+import { formatDate } from "../utils/date";
 import styles from "../styles/Home.module.css";
 
 function Home() {
@@ -18,18 +19,6 @@ function Home() {
   }
 
   const currentQuestions = showAnswered ? answeredQuestions : unansweredQuestions;
-
-  const formatDate = (timestamp) => {
-    const date = new Date(timestamp);
-    return date.toLocaleString('en-US', {
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true,
-      month: 'numeric',
-      day: 'numeric',
-      year: 'numeric'
-    });
-  };
 
   return (
     <PageLayout centered={true} maxWidth="1200px">
