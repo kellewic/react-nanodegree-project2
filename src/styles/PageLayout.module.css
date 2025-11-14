@@ -1,0 +1,18 @@
+.container {
+  composes: container from "../styles/shared.css";
+}
+
+.mainContent {
+  composes: mainContent from "../styles/shared.css";
+}
+
+/* Centered layout variant */
+.mainContent:has(.contentWrapper) {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.contentWrapper {
+  composes: contentWrapper from "../styles/shared.css";
+}

@@ -1,84 +1,91 @@
 /* Layout with sidebar */
 .container {
-    display: flex;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  }
-  
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.mainContent {
+  flex: 1;
+  margin-left: 280px;
+  padding: 2rem;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+}
+
+.contentWrapper {
+  width: 100%;
+  padding: 0 1rem;
+}
+
+/* Adjust margin when sidebar is collapsed */
+@media (max-width: 768px) {
   .mainContent {
-    flex: 1;
-    margin-left: 280px;
-    padding: 2rem;
-    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow-y: auto;
+    margin-left: 80px;
   }
-  
-  /* Adjust margin when sidebar is collapsed */
-  @media (max-width: 768px) {
-    .mainContent {
-      margin-left: 80px;
-    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .mainContent {
+    transition: none;
   }
-  
-  /* Reduced motion support */
-  @media (prefers-reduced-motion: reduce) {
-    .mainContent {
-      transition: none;
-    }
-  }
+}
 
 /* Keyframe animations */
 @keyframes gradientShift {
-    0%, 100% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 @keyframes floating {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 /* Base gradient class with common properties */
 .gradientBg {
-    background-size: 300% 300%;
-    animation: gradientShift 26s ease infinite;
+  background-size: 300% 300%;
+  animation: gradientShift 26s ease infinite;
 }
 
 /* Base glass effect */
 .glassEffect {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
 
 /* Base floating animation */
 .floating {
-    animation: floating 6s ease-in-out infinite;
+  animation: floating 6s ease-in-out infinite;
 }
 
 /* Reduced motion support - applies globally */
 @media (prefers-reduced-motion: reduce) {
-    .gradientBg,
-    .floating {
-        animation: none;
-    }
+  .gradientBg,
+  .floating {
+    animation: none;
+  }
 }
 
 /* Base input focus */
 .inputFocus {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .inputFocus:focus {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }

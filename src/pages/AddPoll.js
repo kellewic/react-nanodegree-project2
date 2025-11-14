@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
-import Sidebar from "../components/Sidebar";
+import PageLayout from "../components/PageLayout";
 import LoadingScreen from "../components/LoadingScreen";
-import styles from "../styles/AddPoll.module.css";
 
 function AddPoll() {
     const usersLoading = useSelector((state) => state.users.loading);
@@ -11,12 +10,9 @@ function AddPoll() {
     }
 
     return (
-        <div className={styles.container}>
-            <Sidebar />
-            <main className={styles.mainContent}>
-                <div className="text-3xl font-bold">Add Poll</div>
-            </main>
-        </div>
+        <PageLayout centered={true} maxWidth="900px">
+            <div className="text-3xl font-bold">Add Poll</div>
+        </PageLayout>
     );
 }
 
