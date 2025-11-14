@@ -69,15 +69,10 @@ const usersSlice = createSlice({
 
             // Update Redux state
             if (state.byId[userId]) {
-                state.byId[userId].questions = [
-                    ...(state.byId[userId].questions || []),
-                    questionId
-                ];
-
-                // Update localStorage
+                // Get local storage users
                 const localUsers = JSON.parse(localStorage.getItem(USERS_STORAGE_KEY) || '{}');
 
-                // Get user from localStorage or from current state
+                // Get the original user
                 const userToUpdate = localUsers[userId] || state.byId[userId];
 
                 localUsers[userId] = {
@@ -89,6 +84,12 @@ const usersSlice = createSlice({
                 };
 
                 localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(localUsers));
+
+                // Update Redux state
+                state.byId[userId].questions = [
+                    ...(state.byId[userId].questions || []),
+                    questionId
+                ];
             }
         },
         addAnswerToUser: (state, action) => {

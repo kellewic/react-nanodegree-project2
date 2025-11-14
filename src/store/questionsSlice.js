@@ -45,15 +45,10 @@ const questionsSlice = createSlice({
 
             // Update Redux state
             if (state.byId[questionId]) {
-                const question = state.byId[questionId];
-                if (question[option]) {
-                    question[option].votes = [...question[option].votes, userId];
-                }
-
-                // Update localStorage
+                // Get local storage questions
                 const localQuestions = JSON.parse(localStorage.getItem(QUESTIONS_STORAGE_KEY) || '{}');
 
-                // Get question from localStorage or from current state
+                // Get the original question
                 const questionToUpdate = localQuestions[questionId] || state.byId[questionId];
 
                 localQuestions[questionId] = {
@@ -64,7 +59,14 @@ const questionsSlice = createSlice({
                     }
                 };
 
+                // Update local storage
                 localStorage.setItem(QUESTIONS_STORAGE_KEY, JSON.stringify(localQuestions));
+
+                // Update Redux state
+                const question = state.byId[questionId];
+                if (question[option]) {
+                    question[option].votes = [...question[option].votes, userId];
+                }
             }
         }
     },
