@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import PageLayout from "../components/PageLayout";
-import Sidebar from "../components/Sidebar";
 import LoadingScreen from "../components/LoadingScreen";
 import { selectLeaderboard } from "../store/selectors";
 import styles from "../styles/Leaderboard.module.css";
