@@ -50,7 +50,7 @@ function Home() {
             aria-pressed={!showAnswered}
           >
             <span className={styles.tabIcon}>📋</span>
-            New Questions
+            Unanswered
             <span className={styles.tabBadge}>{unansweredQuestions.length}</span>
           </button>
           <button
@@ -59,7 +59,7 @@ function Home() {
             aria-pressed={showAnswered}
           >
             <span className={styles.tabIcon}>✅</span>
-            Done
+            Answered
             <span className={styles.tabBadge}>{answeredQuestions.length}</span>
           </button>
         </div>
