@@ -292,7 +292,11 @@
 }
 
 .impersonationBanner {
-  background: linear-gradient(135deg, rgba(255, 152, 0, 0.15) 0%, rgba(255, 193, 7, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 152, 0, 0.15) 0%,
+    rgba(255, 193, 7, 0.1) 100%
+  );
   border: 2px solid rgba(255, 152, 0, 0.4);
   border-radius: 0.75rem;
   padding: 1rem;
@@ -304,7 +308,8 @@
 }
 
 @keyframes pulseGlow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 10px rgba(255, 152, 0, 0.3);
   }
   50% {
@@ -572,4 +577,3 @@
 .sidebarContent::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
 }
-

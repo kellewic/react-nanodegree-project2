@@ -1,83 +1,94 @@
 /* Compose from shared styles and add page-specific background */
 .gradientBg {
-    composes: gradientBg from '../styles/shared.css';
-    background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 25%, #db2777 50%, #dc2626 75%, #1e3a8a 100%);
+  composes: gradientBg from "../styles/shared.css";
+  background: linear-gradient(
+    135deg,
+    #1e3a8a 0%,
+    #7c3aed 25%,
+    #db2777 50%,
+    #dc2626 75%,
+    #1e3a8a 100%
+  );
 }
 
 .glassEffect {
-    composes: glassEffect from '../styles/shared.css';
+  composes: glassEffect from "../styles/shared.css";
 }
 
 .floating {
-    composes: floating from '../styles/shared.css';
+  composes: floating from "../styles/shared.css";
 }
 
 /* Glitch effect */
 .glitch {
-    position: relative;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
-                 0 0 40px rgba(139, 92, 246, 0.3);
-    animation: gentlePulse 3s ease-in-out infinite;
+  position: relative;
+  text-shadow:
+    0 0 20px rgba(255, 255, 255, 0.5),
+    0 0 40px rgba(139, 92, 246, 0.3);
+  animation: gentlePulse 3s ease-in-out infinite;
 }
 
 @keyframes gentlePulse {
-    0%, 100% {
-        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
-                     0 0 40px rgba(139, 92, 246, 0.3);
-    }
-    50% {
-        text-shadow: 0 0 30px rgba(255, 255, 255, 0.6),
-                     0 0 60px rgba(139, 92, 246, 0.4);
-    }
+  0%,
+  100% {
+    text-shadow:
+      0 0 20px rgba(255, 255, 255, 0.5),
+      0 0 40px rgba(139, 92, 246, 0.3);
+  }
+  50% {
+    text-shadow:
+      0 0 30px rgba(255, 255, 255, 0.6),
+      0 0 60px rgba(139, 92, 246, 0.4);
+  }
 }
 
 /* Orbiting animation */
 .orbitRing {
-    width: 140px;
-    height: 140px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    animation: orbit 8s linear infinite;
-    position: relative;
+  width: 140px;
+  height: 140px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  animation: orbit 8s linear infinite;
+  position: relative;
 }
 
 .orbitDot {
-    width: 12px;
-    height: 12px;
-    background: white;
-    border-radius: 50%;
-    position: absolute;
-    top: -6px;
-    left: 50%;
-    margin-left: -6px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  margin-left: -6px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
 @keyframes orbit {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Reduced motion support for page-specific animations */
 @media (prefers-reduced-motion: reduce) {
-    .glitch,
-    .orbitRing {
-        animation: none;
-    }
-    
-    .glitch {
-        text-shadow: none;
-    }
+  .glitch,
+  .orbitRing {
+    animation: none;
+  }
+
+  .glitch {
+    text-shadow: none;
+  }
 }
 
 /* Responsive adjustments */
 @media (max-width: 640px) {
-    .orbitRing {
-        width: 120px;
-        height: 120px;
-    }
+  .orbitRing {
+    width: 120px;
+    height: 120px;
+  }
 }

@@ -1,17 +1,24 @@
 /* Compose from shared styles and add page-specific background */
 .gradientBg {
-    composes: gradientBg from '../styles/shared.css';
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 25%, #334155 50%, #475569 75%, #1e3a8a 100%);
+  composes: gradientBg from "../styles/shared.css";
+  background: linear-gradient(
+    135deg,
+    #1e3a8a 0%,
+    #1e40af 25%,
+    #334155 50%,
+    #475569 75%,
+    #1e3a8a 100%
+  );
 }
 
 .glassEffect {
-    composes: glassEffect from '../styles/shared.css';
+  composes: glassEffect from "../styles/shared.css";
 }
 
 .floating {
-    composes: floating from '../styles/shared.css';
+  composes: floating from "../styles/shared.css";
 }
 
 .inputFocus {
-    composes: inputFocus from '../styles/shared.css';
+  composes: inputFocus from "../styles/shared.css";
 }

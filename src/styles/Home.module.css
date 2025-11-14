@@ -1,7 +1,7 @@
 .container {
-  composes: container from '../styles/shared.css';
+  composes: container from "../styles/shared.css";
 }
 
 .mainContent {
-  composes: mainContent from '../styles/shared.css';
+  composes: mainContent from "../styles/shared.css";
 }

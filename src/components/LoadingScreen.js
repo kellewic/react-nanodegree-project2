@@ -14,19 +14,19 @@ function LoadingScreen({ message = "Loading..." }) {
     <div className={styles.container}>
       <div className={styles.content}>
         <div className={styles.logoContainer}>
-          <img 
-            src={logo} 
-            alt="Employee Polls" 
+          <img
+            src={logo}
+            alt="Employee Polls"
             className={styles.logo}
           />
         </div>
-        
+
         <div className={styles.spinner}>
           <div className={styles.spinnerRing}></div>
           <div className={styles.spinnerRing}></div>
           <div className={styles.spinnerRing}></div>
         </div>
-        
+
         <p className={styles.message}>{message}</p>
       </div>
     </div>
