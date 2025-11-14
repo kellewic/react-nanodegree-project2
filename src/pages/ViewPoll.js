@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { _saveQuestionAnswer } from "../data/_DATA";
+import { _saveQuestionAnswer, _getUsers } from "../data/_DATA";
 import { addAnswerToUser } from "../store/usersSlice";
 import { addAnswerToQuestion } from "../store/questionsSlice";
 import { selectQuestionById } from "../store/selectors";
+import { formatDate } from "../utils/date";
 import PageLayout from "../components/PageLayout";
 import LoadingScreen from "../components/LoadingScreen";
 import styles from "../styles/ViewPoll.module.css";
@@ -47,17 +48,17 @@ function ViewPoll() {
         setIsSubmitting(true);
 
         try {
-            // Try to save to _DATA.js (will fail if user doesn't exist in mock data)
-            try {
+            // Only save to _DATA.js if user exists in the mock data.
+            // There's no function in _DATA.js that saves users and 
+            // _saveQuestionAnswer doesn't check if user exists.
+            const mockDataUsers = Object.keys(await _getUsers());
+
+            if (mockDataUsers.includes(currentUser)) {
                 await _saveQuestionAnswer({
                     authedUser: currentUser,
                     qid: question_id,
                     answer: option
                 });
-            } catch (dataError) {
-                // If _DATA.js fails (user not in mock data), that's okay
-                // We'll still update Redux and localStorage
-                console.warn('Could not save to _DATA.js (user not in mock data):', dataError);
             }
 
             // Always update Redux state and localStorage (this is the source of truth)
@@ -79,18 +80,6 @@ function ViewPoll() {
             console.error('Failed to save answer:', err);
             setIsSubmitting(false);
         }
-    };
-
-    const formatDate = (timestamp) => {
-        const date = new Date(timestamp);
-        return date.toLocaleString('en-US', {
-            hour: 'numeric',
-            minute: '2-digit',
-            hour12: true,
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric'
-        });
     };
 
     return (
