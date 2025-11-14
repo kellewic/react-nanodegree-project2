@@ -101,3 +101,61 @@ export const selectLeaderboard = createSelector(
             .sort((a, b) => b.totalScore - a.totalScore);
     }
 );
+
+/**
+ * Get unanswered questions for current user
+ * Sorted by most recent first
+ * 
+ * @param {Object} state - State object
+ * @returns {Array} Array of unanswered questions with author info
+ */
+export const selectUnansweredQuestions = createSelector(
+    [
+        (state) => state.questions.byId,
+        (state) => state.users.byId,
+        selectCurrentUser
+    ],
+    (questionsById, usersById, currentUser) => {
+        if (!currentUser) return [];
+
+        const questions = Object.values(questionsById);
+        const answeredIds = Object.keys(currentUser.answers || {});
+
+        return questions
+            .filter(question => !answeredIds.includes(question.id))
+            .map(question => ({
+                ...question,
+                author: usersById[question.author]
+            }))
+            .sort((a, b) => b.timestamp - a.timestamp);
+    }
+);
+
+/**
+ * Get answered questions for current user
+ * Sorted by most recent first
+ * 
+ * @param {Object} state - State object
+ * @returns {Array} Array of answered questions with author info
+ */
+export const selectAnsweredQuestions = createSelector(
+    [
+        (state) => state.questions.byId,
+        (state) => state.users.byId,
+        selectCurrentUser
+    ],
+    (questionsById, usersById, currentUser) => {
+        if (!currentUser) return [];
+
+        const questions = Object.values(questionsById);
+        const answeredIds = Object.keys(currentUser.answers || {});
+
+        return questions
+            .filter(question => answeredIds.includes(question.id))
+            .map(question => ({
+                ...question,
+                author: usersById[question.author]
+            }))
+            .sort((a, b) => b.timestamp - a.timestamp);
+    }
+);
