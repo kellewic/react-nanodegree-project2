@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store/global.js";
 import { loadUsers } from "./store/usersSlice.js";
+import { loadQuestions } from "./store/questionsSlice.js";
 import "./styles/shared.css";
 import Home from "./pages/Home.js";
 import AddPoll from "./pages/AddPoll.js";
@@ -16,6 +17,7 @@ import RequireAuth from "./components/RequireAuth.js";
 
 // Load initial data
 store.dispatch(loadUsers());
+store.dispatch(loadQuestions());
 
 createRoot(document.getElementById("root")).render(
     <StrictMode>
@@ -24,13 +26,13 @@ createRoot(document.getElementById("root")).render(
                 <Routes>
                     {/* Protected routes */}
                     <Route path="/" element={<RequireAuth><Home /></RequireAuth>} />
+                    <Route path="/add" element={<RequireAuth><AddPoll /></RequireAuth>} />
+                    <Route path="/questions/:question_id" element={<RequireAuth><ViewPoll /></RequireAuth>} />
+                    <Route path="/leaderboard" element={<RequireAuth><Leaderboard /></RequireAuth>} />
 
                     {/* Public routes */}
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
-                    <Route path="/add" element={<AddPoll />} />
-                    <Route path="/questions/:question_id" element={<ViewPoll />} />
-                    <Route path="/leaderboard" element={<Leaderboard />} />
 
                     {/* Catch all routes */}
                     <Route path="/404" element={<NotFound />} />

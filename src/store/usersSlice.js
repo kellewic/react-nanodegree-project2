@@ -37,6 +37,33 @@ const usersSlice = createSlice({
             const localUsers = JSON.parse(localStorage.getItem(USERS_STORAGE_KEY) || '{}');
             localUsers[user.id] = user;
             localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(localUsers));
+        },
+        addQuestionToUser: (state, action) => {
+            const { userId, questionId } = action.payload;
+
+            // Update Redux state
+            if (state.byId[userId]) {
+                state.byId[userId].questions = [
+                    ...(state.byId[userId].questions || []),
+                    questionId
+                ];
+
+                // Update localStorage
+                const localUsers = JSON.parse(localStorage.getItem(USERS_STORAGE_KEY) || '{}');
+
+                // Get user from localStorage or from current state
+                const userToUpdate = localUsers[userId] || state.byId[userId];
+
+                localUsers[userId] = {
+                    ...userToUpdate,
+                    questions: [
+                        ...(userToUpdate.questions || []),
+                        questionId
+                    ]
+                };
+
+                localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(localUsers));
+            }
         }
     },
     extraReducers: (builder) => {
@@ -55,5 +82,5 @@ const usersSlice = createSlice({
     }
 });
 
-export const { addUser } = usersSlice.actions;
+export const { addUser, addQuestionToUser } = usersSlice.actions;
 export default usersSlice.reducer;
