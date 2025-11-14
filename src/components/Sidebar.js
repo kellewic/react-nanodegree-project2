@@ -1,14 +1,27 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import { selectCurrentUser } from '../store/selectors';
-import { logout } from '../store/authSlice';
+import {
+    selectCurrentUser,
+    selectLoggedInUser,
+    selectIsImpersonating,
+    selectImpersonatedUser,
+    selectAvailableUsersForImpersonation
+} from '../store/selectors';
+import { logout, startImpersonation, stopImpersonation } from '../store/authSlice';
 import styles from '../styles/Sidebar.module.css';
 import logo from '../images/logo.png';
 
 function Sidebar() {
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const [showUserDropdown, setShowUserDropdown] = useState(false);
+
     const currentUser = useSelector(selectCurrentUser);
+    const loggedInUser = useSelector(selectLoggedInUser);
+    const isImpersonating = useSelector(selectIsImpersonating);
+    const impersonatedUser = useSelector(selectImpersonatedUser);
+    const availableUsers = useSelector(selectAvailableUsersForImpersonation);
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -19,6 +32,15 @@ function Sidebar() {
 
     const toggleSidebar = () => {
         setIsCollapsed(!isCollapsed);
+    };
+
+    const handleStartImpersonation = (userId) => {
+        dispatch(startImpersonation(userId));
+        setShowUserDropdown(false);
+    };
+
+    const handleStopImpersonation = () => {
+        dispatch(stopImpersonation());
     };
 
     if (!currentUser) {
@@ -63,18 +85,18 @@ function Sidebar() {
                     </svg>
                 </button>
 
-                {/* User Profile */}
+                {/* User Profile - Shows Logged-In User */}
                 <div className={styles.userProfile}>
                     <div className={styles.avatar}>
                         <img
-                            src={currentUser.avatarURL}
-                            alt={`${currentUser.name}'s avatar`}
+                            src={loggedInUser.avatarURL}
+                            alt={`${loggedInUser.name}'s avatar`}
                             className={styles.avatarImg}
                         />
                     </div>
                     {!isCollapsed && (
                         <div className={styles.userInfo}>
-                            <div className={styles.userName}>{currentUser.name}</div>
+                            <div className={styles.userName}>{loggedInUser.name}</div>
                             <div className={styles.userRole}>Team Member</div>
                         </div>
                     )}
@@ -146,6 +168,119 @@ function Sidebar() {
 
                 {/* Bottom Section */}
                 <div className={styles.bottomSection}>
+                    {/* Impersonation Section */}
+                    {isImpersonating ? (
+                        <div className={styles.impersonationBanner}>
+                            <div className={styles.impersonatedUser}>
+                                <div className={`${styles.avatar} ${styles.impersonatedAvatar}`}>
+                                    <img
+                                        src={impersonatedUser.avatarURL}
+                                        alt={`Impersonating ${impersonatedUser.name}`}
+                                        className={styles.avatarImg}
+                                    />
+                                    <div className={styles.impersonationBadge} aria-label="Impersonating">
+                                        <svg
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        >
+                                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                            <circle cx="8.5" cy="7" r="4" />
+                                            <polyline points="17 11 19 13 23 9" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                {!isCollapsed && (
+                                    <div className={styles.userInfo}>
+                                        <div className={styles.impersonationLabel}>Impersonating</div>
+                                        <div className={styles.userName}>{impersonatedUser.name}</div>
+                                    </div>
+                                )}
+                            </div>
+                            {!isCollapsed && (
+                                <button
+                                    onClick={handleStopImpersonation}
+                                    className={styles.stopImpersonationBtn}
+                                    aria-label="Stop impersonating"
+                                >
+                                    Stop
+                                </button>
+                            )}
+                            {isCollapsed && (
+                                <button
+                                    onClick={handleStopImpersonation}
+                                    className={styles.stopImpersonationBtnCollapsed}
+                                    aria-label="Stop impersonating"
+                                    title="Stop impersonating"
+                                >
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    >
+                                        <line x1="18" y1="6" x2="6" y2="18" />
+                                        <line x1="6" y1="6" x2="18" y2="18" />
+                                    </svg>
+                                </button>
+                            )}
+                        </div>
+                    ) : (
+                        <div className={styles.impersonationSection}>
+                            <button
+                                onClick={() => setShowUserDropdown(!showUserDropdown)}
+                                className={styles.impersonateBtn}
+                                aria-label="Switch user"
+                                aria-expanded={showUserDropdown}
+                            >
+                                <div className={styles.navIcon}>
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                        <circle cx="8.5" cy="7" r="4" />
+                                        <line x1="17" y1="11" x2="23" y2="11" />
+                                        <line x1="20" y1="8" x2="20" y2="14" />
+                                    </svg>
+                                </div>
+                                {!isCollapsed && <span className={styles.navLabel}>Switch User</span>}
+                            </button>
+
+                            {/* User Dropdown */}
+                            {showUserDropdown && !isCollapsed && (
+                                <div className={styles.userDropdown} role="menu">
+                                    <div className={styles.dropdownHeader}>Select User</div>
+                                    {availableUsers.map(user => (
+                                        <button
+                                            key={user.id}
+                                            onClick={() => handleStartImpersonation(user.id)}
+                                            className={styles.userOption}
+                                            role="menuitem"
+                                        >
+                                            <img
+                                                src={user.avatarURL}
+                                                alt=""
+                                                className={styles.miniAvatar}
+                                            />
+                                            <span>{user.name}</span>
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    )}
+
                     <button
                         onClick={handleLogout}
                         className={styles.logoutBtn}
