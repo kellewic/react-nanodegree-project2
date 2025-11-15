@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { _saveQuestionAnswer, _getUsers } from "../data/_DATA";
 import { addAnswerToUser } from "../store/usersSlice";
@@ -9,6 +9,7 @@ import { formatDate } from "../utils/date";
 import PageLayout from "../components/PageLayout";
 import LoadingScreen from "../components/LoadingScreen";
 import styles from "../styles/ViewPoll.module.css";
+
 
 function ViewPoll() {
     const { question_id } = useParams();
@@ -29,8 +30,7 @@ function ViewPoll() {
 
     // Redirect to 404 if question doesn't exist
     if (!question) {
-        navigate('/404', { replace: true });
-        return null;
+        return <Navigate to="/404" replace />;
     }
 
     const hasAnswered = !!question.userAnswer;
