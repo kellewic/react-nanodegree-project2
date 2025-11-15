@@ -22,3 +22,63 @@
 .inputFocus {
   composes: inputFocus from "../styles/shared.css";
 }
+
+/* OR Divider */
+.divider {
+  position: relative;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.3) 20%,
+    rgba(255, 255, 255, 0.3) 80%,
+    transparent
+  );
+}
+
+.dividerText {
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 2rem;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  backdrop-filter: blur(10px);
+}
+
+/* Quick Login Section */
+.quickLoginSection {
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+
+.quickLoginSection:hover {
+  opacity: 1;
+}
+
+.quickLoginHeader {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.quickLoginTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

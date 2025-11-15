@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/authSlice";
 import ErrorMessage from "../components/ErrorMessage";
+import UserDropdown from "../components/UserDropdown";
 import styles from "../styles/Login.module.css";
 
 /**
@@ -21,7 +22,7 @@ function Login() {
     const users = useSelector((state) => state.users.byId);
     const usersLoading = useSelector((state) => state.users.loading);
 
-    // Get the return URL from location state, default to home
+    // Get return URL from location state, default to home
     const returnUrl = location.state?.returnUrl || '/';
 
     const handleSubmit = (e) => {
@@ -52,6 +53,12 @@ function Login() {
         navigate(returnUrl);
     };
 
+    const handleQuickLogin = (selectedUserId) => {
+        setError("");
+        dispatch(login(selectedUserId));
+        navigate(returnUrl);
+    };
+
     return (
         <div className={`min-h-screen w-full flex items-center justify-center relative overflow-hidden ${styles.gradientBg}`}>
             {/* Animated Background Blobs */}
@@ -64,14 +71,19 @@ function Login() {
                 {/* Glass Card */}
                 <div className={`${styles.glassEffect} rounded-3xl shadow-2xl p-8 md:p-12`}>
                     {/* Header */}
-                    <div className="text-center mb-8">
+                    <div className="text-center mb-6">
                         <div className="inline-block p-3 bg-white/20 rounded-2xl mb-4">
                             <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                             </svg>
                         </div>
                         <h1 className="text-3xl font-bold text-white mb-2">Welcome Back</h1>
-                        <p className="text-white/80">Sign in to continue to your account</p>
+                        <p className="text-white/80 mb-4">Sign in to continue to your account</p>
+
+                        {/* Sign Up Link */}
+                        <div className="text-white/70 text-sm">
+                            Don't have an account? <Link to="/signup" className="text-white font-semibold hover:text-white/90 transition-colors">Sign up</Link>
+                        </div>
                     </div>
 
                     {/* Error Message */}
@@ -125,10 +137,36 @@ function Login() {
                         </button>
                     </form>
 
-                    {/* Sign Up Link */}
-                    <div className="mt-8 text-center text-white/80">
-                        <div>Don't have an account?</div>
-                        <Link to="/signup" className="text-white font-semibold hover:text-white/90 transition-colors">Sign up</Link>
+                    {/* OR Divider */}
+                    <div className={styles.divider}>
+                        <span className={styles.dividerText}>OR</span>
+                    </div>
+
+                    {/* Quick Login Section */}
+                    <div className={styles.quickLoginSection}>
+                        <div className={styles.quickLoginHeader}>
+                            <h2 className={styles.quickLoginTitle}>Quick Login</h2>
+                        </div>
+                        <UserDropdown
+                            title="Select User"
+                            clickHandler={handleQuickLogin}
+                            styleOverrides={{
+                                container: {
+                                    position: 'static',
+                                    background: 'rgba(255, 255, 255, 0.08)',
+                                    border: '1px solid rgba(255, 255, 255, 0.15)',
+                                    maxHeight: '200px',
+                                    animation: 'none'
+                                },
+                                header: {
+                                    color: 'rgba(255, 255, 255, 0.7)',
+                                    fontSize: '0.75rem'
+                                },
+                                option: {
+                                    fontSize: '0.875rem'
+                                }
+                            }}
+                        />
                     </div>
                 </div>
             </div>
