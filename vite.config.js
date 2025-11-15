@@ -53,8 +53,15 @@ export default defineConfig({
   },
   esbuild: {
     loader: "jsx",
-    include: /.*\.jsx?$/,
+    include: [/.*\.jsx?$/, /src\/.*\.js$/, /node_modules\/.*\.js$/],
     exclude: [],
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      loader: {
+        '.js': 'jsx',
+      },
+    },
   },
   resolve: {
     alias: {
