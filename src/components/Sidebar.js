@@ -10,6 +10,7 @@ import {
 } from '../store/selectors';
 import { logout, startImpersonation, stopImpersonation } from '../store/authSlice';
 import styles from '../styles/Sidebar.module.css';
+import UserDropdown from './UserDropdown';
 import logo from '../images/logo.png';
 
 function Sidebar() {
@@ -232,6 +233,7 @@ function Sidebar() {
                         </div>
                     ) : (
                         <div className={styles.impersonationSection}>
+                            {/* Switch User Button */}
                             <button
                                 onClick={() => setShowUserDropdown(!showUserDropdown)}
                                 className={styles.impersonateBtn}
@@ -259,24 +261,7 @@ function Sidebar() {
 
                             {/* User Dropdown */}
                             {showUserDropdown && !isCollapsed && (
-                                <div className={styles.userDropdown} role="menu">
-                                    <div className={styles.dropdownHeader}>Select User</div>
-                                    {availableUsers.map(user => (
-                                        <button
-                                            key={user.id}
-                                            onClick={() => handleStartImpersonation(user.id)}
-                                            className={styles.userOption}
-                                            role="menuitem"
-                                        >
-                                            <img
-                                                src={user.avatarURL}
-                                                alt=""
-                                                className={styles.miniAvatar}
-                                            />
-                                            <span>{user.name}</span>
-                                        </button>
-                                    ))}
-                                </div>
+                                <UserDropdown title="Select User" clickHandler={handleStartImpersonation} />
                             )}
                         </div>
                     )}
